@@ -1,4 +1,5 @@
 //your code here
+//your code here
 let resetBtn=document.getElementById("reset")
 let randomImg=document.getElementById("randomImg")
 let verifyBtn=document.getElementById("verify")
@@ -6,7 +7,7 @@ let images=document.getElementsByTagName("img")
 let para=document.getElementById("para")
 let arrayOfImages=["img1","img2","img3","img4","img5"]
 
-let randompic=arrayOfImages[Math.round(Math.random()*5)]
+let randompic=arrayOfImages[Math.floor(Math.random()* arrayOfImages.length)];
 
 let newImg=document.createElement("img")
 newImg.className=randompic;
@@ -18,22 +19,17 @@ let selectedImg=[]
 for(let i=0;i<images.length;i++){
 	let currentImg=images[i];
 	currentImg.addEventListener("click",()=>{
-	selectedImg.push(currentImg);
-	clicked++;
-	currentImg.classList.add("selected");
-	if(clicked==1){
-		resetBtn.style.display="flex";
-		resetBtn.addEventListener("click",()=>{
-			clicked=0;
-	resetBtn.style.display="none";
-				para.style.display="none"
-			for(let i of selectedImg){
-				i.classList.remove("selected");
+        if (clicked >= 2 || selectedImg.includes(currentImg)){
+            return;
+        } 
 
-			}
-			
-			
-		});
+     selectedImg.push(currentImg)
+	
+	clicked++;
+	currentImg.classList.add("selected")
+	if(clicked==1){
+        resetBtn.style.display="flex";
+		
 	}
 		else if(clicked==2){
 		verifyBtn.style.display="flex"
@@ -44,6 +40,19 @@ for(let i=0;i<images.length;i++){
 	});
 }
 
+
+resetBtn.addEventListener("click",()=>{
+    clicked=0;
+resetBtn.style.display="none";
+verifyBtn.style.display="none"
+        para.style.display="none"
+    for(let i of selectedImg){
+        i.classList.remove("selected");
+       
+    }
+    selectedImg=[]
+    
+});
 
 verifyBtn.addEventListener("click",()=>{
 	let check=[];
@@ -69,3 +78,5 @@ if(samePic==true){
 	}
 	verifyBtn.style.display="none"
 })
+
+
