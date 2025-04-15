@@ -25,13 +25,13 @@ for(let i=0;i<images.length;i++){
 		resetBtn.style.display="flex";
 		resetBtn.addEventListener("click",()=>{
 			clicked=0;
-
+	resetBtn.style.display="none";
+				para.style.display="none"
 			for(let i of selectedImg){
-				i.classList.remove("selectedImg");
+				i.classList.remove("selected");
 
 			}
-				resetBtn.style.display="none";
-				para.style.display="none"
+			
 			
 		});
 	}
